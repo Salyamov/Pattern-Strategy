@@ -36,6 +36,10 @@ void Game::run()
 
 Game::~Game()
 {
+	//очищаем память от всех игровых объектов
+	for (auto& v : tanks)
+		delete v;
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

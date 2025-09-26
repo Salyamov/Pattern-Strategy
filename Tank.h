@@ -1,7 +1,11 @@
 #pragma once
 #pragma warning(disable : 26812)
 #include <SDL_image.h>
+#include <memory>
 #include "RndGenerator.h"
+
+using std::unique_ptr;
+using std::make_unique;
 
 class Game;
 
@@ -47,10 +51,10 @@ class Tank
 {
 	SDL_Texture* texture;
 protected:
-	MoveBehavior* moveComponent;
+	unique_ptr<MoveBehavior> moveComponent;
 public:
-	Tank(int x_, int y_, MoveBehavior* mv);
-	virtual ~Tank() {}
+	Tank(int x_, int y_, unique_ptr<MoveBehavior> mv);
+	virtual ~Tank() { if (texture) SDL_DestroyTexture(texture); }
 	virtual void move() = 0;
 	void draw();
 };
@@ -59,20 +63,20 @@ class LightTank : public Tank
 {
 	
 public:
-	LightTank(int x_, int y_) : Tank(x_, y_, new MoveFast())  { }
+	LightTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveFast>())  { }
 	void move();
 };
 
 class MediumTank : public Tank
 {
 public:
-	MediumTank(int x_, int y_) : Tank(x_, y_, new MoveModerate()) { }
+	MediumTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveModerate>()) { }
 	void move();
 };
 
 class HeavyTank : public Tank
 {
 public:
-	HeavyTank(int x_, int y_) : Tank(x_, y_, new MoveSlow()) { }
+	HeavyTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveSlow>()) { }
 	void move();
 };

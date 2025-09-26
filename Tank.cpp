@@ -12,15 +12,14 @@ void MoveBehavior::updateShotTimer()
 	shotTimer = r.getNum(2);
 }
 
-Tank::Tank(int x_, int y_, MoveBehavior* mv)
+Tank::Tank(int x_, int y_, unique_ptr<MoveBehavior> mv) : moveComponent(std::move(mv))
 {
-	mv->x = x_;
-	mv->y = y_;
+	moveComponent->x = x_;
+	moveComponent->y = y_;
 	texture = IMG_LoadTexture(renderer, "tank.png");
-	mv->direction = UP;
-	mv->updateShotTimer();
-	mv->updateSwitchMoveDirectionTimer();
-	moveComponent = mv;
+	moveComponent->direction = UP;
+	moveComponent->updateShotTimer();
+	moveComponent->updateSwitchMoveDirectionTimer();
 }
 
 
