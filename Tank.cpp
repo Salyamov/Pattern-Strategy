@@ -55,40 +55,9 @@ void HeavyTank::move()
 	moveComponent->move();	
 }
 
-void MoveSlow::move()
+void MoveRand::move()
 {
-	if (direction == UP) y -= 4;
-	if (direction == DOWN) y += 4;
-	if (direction == LEFT) x -= 4;
-	if (direction == RIGHT) x += 4;
-
-	shotTimer--;
-	switchMoveDirectionTimer--;
-
-	if (shotTimer <= 0)
-		updateShotTimer();
-	if (switchMoveDirectionTimer <= 0)
-		updateSwitchMoveDirectionTimer();
-}
-
-void MoveModerate::move()
-{
-	if (direction == UP) y -= 2;
-	if (direction == DOWN) y += 2;
-	if (direction == LEFT) x -= 2;
-	if (direction == RIGHT) x += 2;
-
-	shotTimer--;
-	switchMoveDirectionTimer--;
-
-	if (shotTimer <= 0)
-		updateShotTimer();
-	if (switchMoveDirectionTimer <= 0)
-		updateSwitchMoveDirectionTimer();
-}
-
-void MoveFast::move()
-{
+	//двигается случайным образом
 	if (direction == UP) y -= 1;
 	if (direction == DOWN) y += 1;
 	if (direction == LEFT) x -= 1;
@@ -97,8 +66,66 @@ void MoveFast::move()
 	shotTimer--;
 	switchMoveDirectionTimer--;
 
-	if (switchMoveDirectionTimer <= 0)
-		updateSwitchMoveDirectionTimer();
 	if (shotTimer <= 0)
 		updateShotTimer();
+	if (switchMoveDirectionTimer <= 0)
+		updateSwitchMoveDirectionTimer();
+}
+
+void MoveLeftRight::move()
+{
+	//двигается в право-влево
+	static int ct;
+
+	ct++;
+
+	if (ct < 20)
+		direction = RIGHT;
+	else if (ct < 40)
+	{
+		direction = LEFT;
+	}
+	else
+		ct = 0;
+
+	if (direction == RIGHT)
+		x++;
+	else if (direction == LEFT)
+		x--;
+	
+}
+
+void MoveUpDown::move()
+{
+	//двигается вверх-вниз ромбом
+	static int ct;
+
+	ct++;
+
+	if (ct < 20)
+	{
+		direction = DOWN;
+	}
+		
+	else if (ct < 40)
+	{
+		direction = UP;
+	}
+	else
+		ct = 0;
+
+	if (direction == UP)
+		y++;
+	else if (direction == DOWN)
+		y--;
+}
+
+void StayStill::move()
+{
+
+}
+
+void MonumentTank::move()
+{
+	moveComponent->move();
 }

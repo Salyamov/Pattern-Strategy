@@ -28,19 +28,26 @@ public:
 	virtual void move() = 0;
 };
 
-class MoveSlow : public MoveBehavior
+class MoveRand : public MoveBehavior
 {
 public:
 	void move();
 };
 
-class MoveModerate : public MoveBehavior
+class MoveLeftRight : public MoveBehavior
 {
 public:
 	void move();
 };
 
-class MoveFast : public MoveBehavior
+class MoveUpDown : public MoveBehavior
+{
+public:
+	void move();
+};
+
+//новое поведение
+class StayStill : public MoveBehavior
 {
 public:
 	void move();
@@ -63,20 +70,27 @@ class LightTank : public Tank
 {
 	
 public:
-	LightTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveFast>())  { }
+	LightTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveRand>())  {}
 	void move();
 };
 
 class MediumTank : public Tank
 {
 public:
-	MediumTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveModerate>()) { }
+	MediumTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveLeftRight>()) {}
 	void move();
 };
 
 class HeavyTank : public Tank
 {
 public:
-	HeavyTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveSlow>()) { }
+	HeavyTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveUpDown>()) {}
+	void move();
+};
+
+class MonumentTank : public Tank
+{
+public:
+	MonumentTank(int x_, int y_) : Tank(x_, y_, make_unique<StayStill>()) {}
 	void move();
 };

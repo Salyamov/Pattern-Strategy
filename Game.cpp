@@ -19,6 +19,7 @@ Game::Game(int screenWidth, int screenHeight, bool fullscreen)
 	tanks.push_back(new LightTank(400, 200));
 	tanks.push_back(new MediumTank(200, 400));
 	tanks.push_back(new HeavyTank(300, 500));
+	tanks.push_back(new MonumentTank(100, 500));
 		
 }
 
