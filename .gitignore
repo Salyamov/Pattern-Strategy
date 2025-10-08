@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+!external\sdl\lib\x64\*.lib
+!external\sdl_image\lib\x64\*.lib
