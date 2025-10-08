@@ -62,7 +62,7 @@ protected:
 public:
 	Tank(int x_, int y_, unique_ptr<MoveBehavior> mv);
 	virtual ~Tank() { if (texture) SDL_DestroyTexture(texture); }
-	virtual void move() = 0;
+	void move() { moveComponent->move(); }
 	void draw();
 };
 
@@ -71,26 +71,22 @@ class LightTank : public Tank
 	
 public:
 	LightTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveRand>())  {}
-	void move();
 };
 
 class MediumTank : public Tank
 {
 public:
 	MediumTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveLeftRight>()) {}
-	void move();
 };
 
 class HeavyTank : public Tank
 {
 public:
 	HeavyTank(int x_, int y_) : Tank(x_, y_, make_unique<MoveUpDown>()) {}
-	void move();
 };
 
 class MonumentTank : public Tank
 {
 public:
 	MonumentTank(int x_, int y_) : Tank(x_, y_, make_unique<StayStill>()) {}
-	void move();
 };

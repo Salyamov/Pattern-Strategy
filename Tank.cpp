@@ -40,21 +40,6 @@ void Tank::draw()
 
 }
 
-void LightTank::move()
-{
-	moveComponent->move();
-}
-
-void MediumTank::move()
-{
-	moveComponent->move();
-}
-
-void HeavyTank::move()
-{
-	moveComponent->move();	
-}
-
 void MoveRand::move()
 {
 	//двигается случайным образом
@@ -123,9 +108,4 @@ void MoveUpDown::move()
 void StayStill::move()
 {
 
-}
-
-void MonumentTank::move()
-{
-	moveComponent->move();
 }
