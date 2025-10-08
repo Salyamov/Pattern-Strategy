@@ -36,7 +36,7 @@ void Tank::draw()
 	dst.w = 10;
 	dst.h = 10;
 	
-	SDL_RenderCopy(renderer, texture, &src, &dst);
+	SDL_RenderCopyEx(renderer, texture, &src, &dst, moveComponent->direction * 90, 0, SDL_FLIP_NONE);
 
 }
 
@@ -100,9 +100,9 @@ void MoveUpDown::move()
 		ct = 0;
 
 	if (direction == UP)
-		y++;
-	else if (direction == DOWN)
 		y--;
+	else if (direction == DOWN)
+		y++;
 }
 
 void StayStill::move()

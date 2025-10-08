@@ -9,7 +9,7 @@ using std::make_unique;
 
 class Game;
 
-enum DIR {UP, LEFT, DOWN, RIGHT};
+enum DIR {UP, RIGHT, DOWN, LEFT};
 
 class MoveBehavior
 {
