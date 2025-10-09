@@ -13,7 +13,8 @@ enum DIR {UP, RIGHT, DOWN, LEFT};
 
 class MoveBehavior
 {
-public:
+	friend class Tank;
+protected:
 	int switchMoveDirectionTimer;
 	int shotTimer;
 	DIR direction;
@@ -59,7 +60,7 @@ class Tank
 	SDL_Texture* texture;
 protected:
 	unique_ptr<MoveBehavior> moveComponent;
-public:
+public:	
 	Tank(int x_, int y_, unique_ptr<MoveBehavior> mv);
 	virtual ~Tank() { if (texture) SDL_DestroyTexture(texture); }
 	void move() { moveComponent->move(); }
